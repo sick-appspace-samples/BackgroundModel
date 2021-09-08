@@ -1,23 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Manifest.mf.xsd">
-<application name="BackgroundModel">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest>
+    <application name="BackgroundModel">
+        <crown name="BackgroundModel">
+            <desc>user script</desc>
+        </crown>
         <meta key="author">AppSpace Sample</meta>
         <meta key="version">2.12.0</meta>
-        <meta key="licensed">false</meta>
         <meta key="priority">low</meta>
         <meta key="tags">InspectorP,SIM4000,Image,Algorithm,Filter,Analysis</meta>
         <meta key="read-protected">false</meta>
         <meta key="copy-protected">false</meta>
-	<entry path="resources">
-<file type="application">area.json</file>
-</entry>
-<entry path="scripts" default="BackgroundModel.lua">
-<file type="text/x-lua">BackgroundModel.lua</file>
-</entry>
-<crown name="BackgroundModel">
-<desc>user script</desc>
-</crown>
-<hash>/wCR//Fu9lGxrybsktyxnE4YcWUUPaz67TyN5+INqmVI665gAM2Vx6GK7HDrceYlf4q9n8V77nCIjVVztpFXXQ==</hash>
-</application>
+        <entry default="BackgroundModel.lua" path="scripts"/>
+    </application>
 </manifest>
- 
