@@ -33,14 +33,14 @@ local backgroundModel = Image.BackgroundModel.createRunningGaussian(lineScanSens
 
 -- Create a viewer and a decorator that spans 0 to 100 degrees celsius
 local viewer = View.create()
-local imagedecoration = View.ImageDecoration.create()
-imagedecoration:setRange(0, 100)
+local imagedecoration = View.ImageDecoration.create():setRange(0, 100)
 
 --End of Global Scope-----------------------------------------------------------
 
 --Start of Function and Event Scope---------------------------------------------
 
--- Handle each captured image
+--- Handle each captured image
+---@param image Image
 local function callback(image)
   
   -- Update background model with this new observation
@@ -52,9 +52,14 @@ local function callback(image)
   -- Get the model content
   local modelImages = backgroundModel:getModelImages()
   
-  -- Function used to build a visualization image
-  -- This will concatenate the input image with any provided model images
+  --- Function used to build a visualization image
+  --- This will concatenate the input image with any provided model images
+  ---@param input Image
+  ---@param modelImagesV Image[]
+  ---@return Image
   local function createDisplayImage(input, modelImagesV)
+    ---@param inputI Image
+    ---@return Image
     local function toFloat(inputI)
       local inputF = Image.toType(inputI, "FLOAT32")
       local _,_,pixelSizeZ = Image.getPixelSize(inputI)
@@ -82,8 +87,8 @@ local function callback(image)
   
   -- Display a visualization of the model
   viewer:clear()
-  local imid = viewer:addImage(displayImage, imagedecoration)
-  viewer:addPixelRegion(fg, nil, nil, imid)
+  viewer:addImage(displayImage, imagedecoration)
+  viewer:addPixelRegion(fg)
   viewer:present()
 end
 
@@ -92,6 +97,7 @@ local function main()
   -- Use this simple function to keep the framerate
   -- we could also have used a Timer object.
   local tic = DateTime.getTimestamp()
+  ---@param hz int
   local function pace(hz)
     local toc = DateTime.getTimestamp()
     local sleeptime = 1000/hz - (toc-tic)
